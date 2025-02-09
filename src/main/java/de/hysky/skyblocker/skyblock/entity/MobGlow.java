@@ -58,18 +58,6 @@ public class MobGlow {
 		return !CACHE.isEmpty();
 	}
 
-	public static boolean hasOrComputeMobGlow(Entity entity) {
-		if (CACHE.containsKey(entity)) {
-			return true;
-		}
-		int color = computeMobGlow(entity);
-		if (color != NO_GLOW) {
-			CACHE.put(entity, color);
-			return true;
-		}
-		return false;
-	}
-
 	public static int getMobGlow(Entity entity) {
 		return CACHE.getInt(entity);
 	}
@@ -112,7 +100,6 @@ public class MobGlow {
 
 				// Regular Mobs
 				case Entity e when SkyblockerConfigManager.get().dungeons.starredMobGlow && isStarred(entity) -> 0xf57738;
-				default -> NO_GLOW;
 			};
 		}
 
@@ -148,8 +135,6 @@ public class MobGlow {
 			//Chivalrous Carnival
 			case ZombieEntity zombie when ZombieShootout.isInZombieShootout() -> ZombieShootout.getZombieGlowColor(zombie);
 			case ArmorStandEntity armorStand when CatchAFish.isInCatchAFish() -> CatchAFish.getFishGlowColor(armorStand);
-
-			default -> NO_GLOW;
 		};
 	}
 
